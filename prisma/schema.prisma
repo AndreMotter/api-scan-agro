@@ -1,0 +1,26 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model sgr_usuario {
+  codigousuario  Int     @id @default(autoincrement())
+  login          String  @unique
+  senha          String
+}
+
+model sgr_cultura {
+  codigocultura  Int     @id @default(autoincrement())
+  nome           String  
+  nomecientifico String?
+  descricao      String? 
+  correferencia  String? 
+  imagem         String?
+  situacao          Boolean @default(true)
+}

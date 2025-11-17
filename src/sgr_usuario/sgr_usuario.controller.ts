@@ -3,32 +3,32 @@ import { SgrUsuarioService } from './sgr_usuario.service';
 import { CreateSgrUsuarioDto } from './dto/create-sgr_usuario.dto';
 import { UpdateSgrUsuarioDto } from './dto/update-sgr_usuario.dto';
 
-@Controller('sgr-usuario')
-export class SgrUsuarioController {
+@Controller('sgr-cultura')
+export class SgrCulturaController {
   constructor(private readonly sgrUsuarioService: SgrUsuarioService) {}
 
-  @Post()
-  create(@Body() createSgrUsuarioDto: CreateSgrUsuarioDto) {
-    return this.sgrUsuarioService.create(createSgrUsuarioDto);
+  @Get("ListarTodos")
+  ListarTodos() {
+    return this.sgrUsuarioService.ListarTodos();
   }
 
-  @Get()
-  findAll() {
-    return this.sgrUsuarioService.findAll();
+  @Get('BuscarPorId/:id')
+  BuscarPorId(@Param('id') id: string) {
+    return this.sgrUsuarioService.BuscarPorId(+id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.sgrUsuarioService.findOne(+id);
+  @Post("Salvar")
+  Salvar(@Body() data: CreateSgrUsuarioDto) {
+    return this.sgrUsuarioService.Salvar(data);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSgrUsuarioDto: UpdateSgrUsuarioDto) {
-    return this.sgrUsuarioService.update(+id, updateSgrUsuarioDto);
+  @Patch('Alterar/:id')
+  Alterar(@Param('id') codigousuario: string, @Body() data: UpdateSgrUsuarioDto) {
+    return this.sgrUsuarioService.Alterar(+codigousuario, data);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.sgrUsuarioService.remove(+id);
+  @Delete('Excluir/:id')
+  Excluir(@Param('id') codigousuario: string) {
+    return this.sgrUsuarioService.Excluir(+codigousuario);
   }
 }

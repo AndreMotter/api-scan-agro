@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
 import { CreateSgrUsuarioDto } from './dto/create-sgr_usuario.dto';
 import { UpdateSgrUsuarioDto } from './dto/update-sgr_usuario.dto';
 
+const prisma = new PrismaClient();
+
 @Injectable()
 export class SgrUsuarioService {
-  create(createSgrUsuarioDto: CreateSgrUsuarioDto) {
-    return 'This action adds a new sgrUsuario';
+
+  ListarTodos() {
+    return prisma.sgr_usuario.findMany();
   }
 
-  findAll() {
-    return `This action returns all sgrUsuario`;
+  BuscarPorId(codigousuario: number) {
+     return prisma.sgr_usuario.findUnique({
+      where: { codigousuario: codigousuario },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sgrUsuario`;
+  Salvar(data: CreateSgrUsuarioDto) {
+   return prisma.sgr_usuario.create({ data });
   }
 
-  update(id: number, updateSgrUsuarioDto: UpdateSgrUsuarioDto) {
-    return `This action updates a #${id} sgrUsuario`;
+  Alterar(codigousuario: number, data: UpdateSgrUsuarioDto) {
+    return prisma.sgr_usuario.update({
+      where: { codigousuario: codigousuario },
+      data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} sgrUsuario`;
+  Excluir(codigousuario: number) {
+    prisma.sgr_usuario.delete({ where: { codigousuario } });
   }
 }

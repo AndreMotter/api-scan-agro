@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
 import { CreateSgrCulturaDto } from './dto/create-sgr_cultura.dto';
 import { UpdateSgrCulturaDto } from './dto/update-sgr_cultura.dto';
 
+const prisma = new PrismaClient();
+
 @Injectable()
 export class SgrCulturaService {
-  create(createSgrCulturaDto: CreateSgrCulturaDto) {
-    return 'This action adds a new sgrCultura';
+
+  ListarTodos() {
+    return prisma.sgr_cultura.findMany();
   }
 
-  findAll() {
-    return `This action returns all sgrCultura`;
+  BuscarPorId(codigocultura: number) {
+     return prisma.sgr_cultura.findUnique({
+      where: { codigocultura: codigocultura },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sgrCultura`;
+  Salvar(data: CreateSgrCulturaDto) {
+   return prisma.sgr_cultura.create({ data });
   }
 
-  update(id: number, updateSgrCulturaDto: UpdateSgrCulturaDto) {
-    return `This action updates a #${id} sgrCultura`;
+  Alterar(codigocultura: number, data: UpdateSgrCulturaDto) {
+    return prisma.sgr_cultura.update({
+      where: { codigocultura: codigocultura },
+      data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} sgrCultura`;
+  Excluir(codigocultura: number) {
+    prisma.sgr_cultura.delete({ where: { codigocultura } });
   }
 }

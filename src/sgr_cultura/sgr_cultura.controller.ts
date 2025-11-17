@@ -9,26 +9,26 @@ export class SgrCulturaController {
 
   @Get("ListarTodos")
   ListarTodos() {
-    return this.sgrCulturaService.findAll();
+    return this.sgrCulturaService.ListarTodos();
   }
 
   @Get('BuscarPorId/:id')
   BuscarPorId(@Param('id') id: string) {
-    return this.sgrCulturaService.findOne(+id);
+    return this.sgrCulturaService.BuscarPorId(+id);
   }
 
   @Post("Salvar")
-  Salvar(@Body() createSgrCulturaDto: CreateSgrCulturaDto) {
-    return this.sgrCulturaService.create(createSgrCulturaDto);
+  Salvar(@Body() data: CreateSgrCulturaDto) {
+    return this.sgrCulturaService.Salvar(data);
   }
 
   @Patch('Alterar/:id')
-  Alterar(@Param('id') id: string, @Body() updateSgrCulturaDto: UpdateSgrCulturaDto) {
-    return this.sgrCulturaService.update(+id, updateSgrCulturaDto);
+  Alterar(@Param('id') codigocultura: string, @Body() data: UpdateSgrCulturaDto) {
+    return this.sgrCulturaService.Alterar(+codigocultura, data);
   }
 
   @Delete('Excluir/:id')
-  Excluir(@Param('id') id: string) {
-    return this.sgrCulturaService.remove(+id);
+  Excluir(@Param('id') codigocultura: string) {
+    return this.sgrCulturaService.Excluir(+codigocultura);
   }
 }

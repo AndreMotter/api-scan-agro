@@ -3,8 +3,8 @@ import { SgrUsuarioService } from './sgr_usuario.service';
 import { CreateSgrUsuarioDto } from './dto/create-sgr_usuario.dto';
 import { UpdateSgrUsuarioDto } from './dto/update-sgr_usuario.dto';
 
-@Controller('sgr-cultura')
-export class SgrCulturaController {
+@Controller('sgr-usuario')
+export class SgrUsuarioController {
   constructor(private readonly sgrUsuarioService: SgrUsuarioService) {}
 
   @Get("ListarTodos")

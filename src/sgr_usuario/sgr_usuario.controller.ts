@@ -12,9 +12,9 @@ export class SgrUsuarioController {
     return this.sgrUsuarioService.ListarTodos();
   }
 
-  @Get('BuscarPorId/:id')
-  BuscarPorId(@Param('id') id: string) {
-    return this.sgrUsuarioService.BuscarPorId(+id);
+  @Get('BuscarPorId/:codigousuario')
+  BuscarPorId(@Param('codigousuario') codigousuario: string) {
+    return this.sgrUsuarioService.BuscarPorId(+codigousuario);
   }
 
   @Post("Salvar")
@@ -22,13 +22,13 @@ export class SgrUsuarioController {
     return this.sgrUsuarioService.Salvar(data);
   }
 
-  @Patch('Alterar/:id')
-  Alterar(@Param('id') codigousuario: string, @Body() data: UpdateSgrUsuarioDto) {
+  @Patch('Alterar/:codigousuario')
+  Alterar(@Param('codigousuario') codigousuario: string, @Body() data: UpdateSgrUsuarioDto) {
     return this.sgrUsuarioService.Alterar(+codigousuario, data);
   }
 
-  @Delete('Excluir/:id')
-  Excluir(@Param('id') codigousuario: string) {
+  @Delete('Excluir/:codigousuario')
+  Excluir(@Param('codigousuario') codigousuario: string) {
     return this.sgrUsuarioService.Excluir(+codigousuario);
   }
 }

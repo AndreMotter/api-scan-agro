@@ -12,9 +12,9 @@ export class SgrCulturaController {
     return this.sgrCulturaService.ListarTodos();
   }
 
-  @Get('BuscarPorId/:id')
-  BuscarPorId(@Param('id') id: string) {
-    return this.sgrCulturaService.BuscarPorId(+id);
+  @Get('BuscarPorId/:codigocultura')
+  BuscarPorId(@Param('codigocultura') codigocultura: string) {
+    return this.sgrCulturaService.BuscarPorId(+codigocultura);
   }
 
   @Post("Salvar")
@@ -22,13 +22,13 @@ export class SgrCulturaController {
     return this.sgrCulturaService.Salvar(data);
   }
 
-  @Patch('Alterar/:id')
-  Alterar(@Param('id') codigocultura: string, @Body() data: UpdateSgrCulturaDto) {
+  @Patch('Alterar/:codigocultura')
+  Alterar(@Param('codigocultura') codigocultura: string, @Body() data: UpdateSgrCulturaDto) {
     return this.sgrCulturaService.Alterar(+codigocultura, data);
   }
 
-  @Delete('Excluir/:id')
-  Excluir(@Param('id') codigocultura: string) {
+  @Delete('Excluir/:codigocultura')
+  Excluir(@Param('codigocultura') codigocultura: string) {
     return this.sgrCulturaService.Excluir(+codigocultura);
   }
 }

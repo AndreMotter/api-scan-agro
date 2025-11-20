@@ -19,30 +19,30 @@ export class SgrCulturaService {
 
   constructor(private prisma: PrismaService) {}
   
-  ListarTodos() {
-    return this.prisma.sgr_cultura.findMany();
+  async ListarTodos() {
+    return await this.prisma.sgr_cultura.findMany();
   }
 
-  BuscarPorId(codigocultura: number) {
-     return this.prisma.sgr_cultura.findUnique({
+  async BuscarPorId(codigocultura: number) {
+     return await this.prisma.sgr_cultura.findUnique({
       where: { codigocultura: codigocultura },
     });
   }
 
-  Salvar(data: CreateSgrCulturaDto) {
+  async Salvar(data: CreateSgrCulturaDto) {
    const sgr_cultura = sgrCulturaSchema.parse(data);
-   return this.prisma.sgr_cultura.create({ data: sgr_cultura });
+   return await this.prisma.sgr_cultura.create({ data: sgr_cultura });
   }
 
-  Alterar(codigocultura: number, data: UpdateSgrCulturaDto) {
+  async Alterar(codigocultura: number, data: UpdateSgrCulturaDto) {
     const sgr_cultura = sgrCulturaSchema.parse(data);
-    return this.prisma.sgr_cultura.update({
+    return await this.prisma.sgr_cultura.update({
       where: { codigocultura: codigocultura },
       data: sgr_cultura,
     });
   }
 
-  Excluir(codigocultura: number) {
-    this.prisma.sgr_cultura.delete({ where: { codigocultura } });
+  async Excluir(codigocultura: number) {
+    await this.prisma.sgr_cultura.delete({ where: { codigocultura } });
   }
 }

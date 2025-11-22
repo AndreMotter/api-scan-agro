@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
 import { CreateSgrCulturaDto } from './dto/create-sgr_cultura.dto';
 import { UpdateSgrCulturaDto } from './dto/update-sgr_cultura.dto';
 import { PrismaService } from 'src/prisma/prisma.service';

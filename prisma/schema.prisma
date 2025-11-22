@@ -23,3 +23,27 @@ model sgr_cultura {
   imagem         String?
   situacao          Boolean @default(true)
 }
+
+model srh_usuario {
+  codigousuario  Int     @id @default(autoincrement())
+  login          String  @unique
+  senha          String
+}
+
+model srh_servidor {
+  codigoservidor Int     @id @default(autoincrement())
+  nome           String
+  identificador  String
+
+  leituras       srh_leitura[]
+}
+
+model srh_leitura {
+  codigoleitura   Int           @id @default(autoincrement())
+  codigoservidor  Int
+  datahora        DateTime
+  valor           Decimal       @db.Decimal(20, 4)
+  unidade         String
+
+  servidor        srh_servidor  @relation(fields: [codigoservidor], references: [codigoservidor])
+}

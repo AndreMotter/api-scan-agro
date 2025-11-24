@@ -31,4 +31,9 @@ export class SrhLeituraController {
   Excluir(@Param('codigoleitura') codigoleitura: string) {
     return this.SrhLeituraService.Excluir(+codigoleitura);
   }
+
+  @Get('TestarApi')
+  TestarApi() {
+    return 'Tudo funcionando João, mete bala';
+  }
 }

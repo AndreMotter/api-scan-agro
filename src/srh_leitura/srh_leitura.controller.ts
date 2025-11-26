@@ -1,7 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { SrhLeituraService } from './srh_leitura.service';
-import { CreateSrhLeituraDto } from './dto/create-srh_leitura.dto';
-import { UpdateSrhLeituraDto } from './dto/update-srh_leitura.dto';
 
 @Controller('srh-leitura')
 export class SrhLeituraController {
@@ -18,12 +16,12 @@ export class SrhLeituraController {
   }
 
   @Post("Salvar")
-  Salvar(@Body() data: CreateSrhLeituraDto) {
+  Salvar(@Body() data: any) {
     return this.SrhLeituraService.Salvar(data);
   }
 
   @Patch('Alterar/:codigoleitura')
-  Alterar(@Param('codigoleitura') codigoleitura: string, @Body() data: UpdateSrhLeituraDto) {
+  Alterar(@Param('codigoleitura') codigoleitura: string, @Body() data: any) {
     return this.SrhLeituraService.Alterar(+codigoleitura, data);
   }
 

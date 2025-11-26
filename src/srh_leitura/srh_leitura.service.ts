@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSrhLeituraDto } from './dto/create-srh_leitura.dto';
-import { UpdateSrhLeituraDto } from './dto/update-srh_leitura.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { z } from 'zod';
 
@@ -26,12 +24,12 @@ export class SrhLeituraService {
     });
   }
 
-  async Salvar(data: CreateSrhLeituraDto) {
+  async Salvar(data: any) {
    const srh_leitura = SrhLeituraSchema.parse(data);
    return await this.prisma.srh_leitura.create({ data: srh_leitura });
   }
 
-  async Alterar(codigoleitura: number, data: UpdateSrhLeituraDto) {
+  async Alterar(codigoleitura: number, data: any) {
     const srh_leitura = SrhLeituraSchema.parse(data);
     return await this.prisma.srh_leitura.update({
       where: { codigoleitura: codigoleitura },

@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSgrCulturaDto } from './dto/create-sgr_cultura.dto';
-import { UpdateSgrCulturaDto } from './dto/update-sgr_cultura.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { z } from 'zod';
 
@@ -28,12 +26,12 @@ export class SgrCulturaService {
     });
   }
 
-  async Salvar(data: CreateSgrCulturaDto) {
+  async Salvar(data: any) {
    const sgr_cultura = sgrCulturaSchema.parse(data);
    return await this.prisma.sgr_cultura.create({ data: sgr_cultura });
   }
 
-  async Alterar(codigocultura: number, data: UpdateSgrCulturaDto) {
+  async Alterar(codigocultura: number, data: any) {
     const sgr_cultura = sgrCulturaSchema.parse(data);
     return await this.prisma.sgr_cultura.update({
       where: { codigocultura: codigocultura },

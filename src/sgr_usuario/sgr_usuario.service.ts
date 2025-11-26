@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSgrUsuarioDto } from './dto/create-sgr_usuario.dto';
-import { UpdateSgrUsuarioDto } from './dto/update-sgr_usuario.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { z } from 'zod';
 
@@ -24,16 +22,16 @@ export class SgrUsuarioService {
     });
   }
 
-  Salvar(data: CreateSgrUsuarioDto) {
+  Salvar(data: any) {
    const sgr_usuario = sgrUsuarioSchema.parse(data);
    return this.prisma.sgr_usuario.create({ data: sgr_usuario });
   }
 
-  Alterar(codigousuario: number, data: UpdateSgrUsuarioDto) {
+  Alterar(codigousuario: number, data: any) {
     const sgr_usuario = sgrUsuarioSchema.parse(data);
     return this.prisma.sgr_usuario.update({
       where: { codigousuario: codigousuario },
-      data,
+      data: sgr_usuario,
     });
   }
 

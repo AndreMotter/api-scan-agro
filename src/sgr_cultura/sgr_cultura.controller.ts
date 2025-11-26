@@ -1,7 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { SgrCulturaService } from './sgr_cultura.service';
-import { CreateSgrCulturaDto } from './dto/create-sgr_cultura.dto';
-import { UpdateSgrCulturaDto } from './dto/update-sgr_cultura.dto';
 
 @Controller('sgr-cultura')
 export class SgrCulturaController {
@@ -18,12 +16,12 @@ export class SgrCulturaController {
   }
 
   @Post("Salvar")
-  Salvar(@Body() data: CreateSgrCulturaDto) {
+  Salvar(@Body() data: any) {
     return this.sgrCulturaService.Salvar(data);
   }
 
   @Patch('Alterar/:codigocultura')
-  Alterar(@Param('codigocultura') codigocultura: string, @Body() data: UpdateSgrCulturaDto) {
+  Alterar(@Param('codigocultura') codigocultura: string, @Body() data: any) {
     return this.sgrCulturaService.Alterar(+codigocultura, data);
   }
 

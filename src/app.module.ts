@@ -3,9 +3,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { SgrCulturaModule } from './sgr_cultura/sgr_cultura.module';
 import { SgrUsuarioModule } from './sgr_usuario/sgr_usuario.module';
 import { SrhLeituraModule } from './srh_leitura/srh_leitura.module';
+import { SrhUsuarioModule } from './srh_usuario/srh_usuario.module';
 
 @Module({
-  imports: [SgrCulturaModule, SgrUsuarioModule, SrhLeituraModule, PrismaModule],
+  imports: [SgrCulturaModule, SgrUsuarioModule, SrhLeituraModule, SrhUsuarioModule, PrismaModule],
   controllers: [],
   providers: [],
 })

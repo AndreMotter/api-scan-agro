@@ -1,7 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { SrhUsuarioService } from './srh_usuario.service';
-import { CreateSrhUsuarioDto } from './dto/create-srh_usuario.dto';
-import { UpdateSrhUsuarioDto } from './dto/update-srh_usuario.dto';
 
 @Controller('srh-usuario')
 export class SrhUsuarioController {
@@ -18,12 +16,12 @@ export class SrhUsuarioController {
   }
 
   @Post("Salvar")
-  Salvar(@Body() data: CreateSrhUsuarioDto) {
+  Salvar(@Body() data: any) {
     return this.SrhUsuarioService.Salvar(data);
   }
 
   @Patch('Alterar/:codigousuario')
-  Alterar(@Param('codigousuario') codigousuario: string, @Body() data: UpdateSrhUsuarioDto) {
+  Alterar(@Param('codigousuario') codigousuario: string, @Body() data: any) {
     return this.SrhUsuarioService.Alterar(+codigousuario, data);
   }
 

@@ -6,18 +6,27 @@ import { SrhLeituraModule } from './srh_leitura/srh_leitura.module';
 import { SrhUsuarioModule } from './srh_usuario/srh_usuario.module';
 import { SrhServidorModule } from './srh_servidor/srh_servidor.module';
 import { JwtAuthMiddleware } from './middleware/jwt.middleware';
-import { JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [SgrCulturaModule, SgrUsuarioModule, SrhLeituraModule, SrhUsuarioModule, SrhServidorModule, PrismaModule],
+  imports: [
+    JwtModule.register({
+      global: true,
+      secret: 'ZOr9aDeuOCuHdlgFiKlIrrqHOKBamiQps40lKFI0dCG',
+      signOptions: { expiresIn: '1h' },
+    }),
+    SgrCulturaModule,
+    SgrUsuarioModule,
+    SrhLeituraModule,
+    SrhUsuarioModule,
+    SrhServidorModule,
+    PrismaModule,
+  ],
   controllers: [],
-  providers: [JwtService],
+  providers: [],
 })
-
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(JwtAuthMiddleware)
-      .forRoutes('*'); 
+    consumer.apply(JwtAuthMiddleware).forRoutes('*');
   }
 }

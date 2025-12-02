@@ -5,6 +5,11 @@ import { SrhUsuarioService } from './srh_usuario.service';
 export class SrhUsuarioController {
   constructor(private readonly SrhUsuarioService: SrhUsuarioService) {}
 
+  @Post("Login")
+  Login(@Body() data: any) {
+    return this.SrhUsuarioService.Login(data.login, data.senha);
+  }
+
   @Get("ListarTodos")
   ListarTodos() {
     return this.SrhUsuarioService.ListarTodos();

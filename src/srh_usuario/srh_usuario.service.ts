@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { z } from 'zod';
+import { JwtService } from '@nestjs/jwt';
 
 export const SrhUsuarioSchema = z.object({
   login: z.string(),
@@ -10,32 +11,56 @@ export const SrhUsuarioSchema = z.object({
 @Injectable()
 export class SrhUsuarioService {
 
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private jwt: JwtService ) {}
   
-  ListarTodos() {
-    return this.prisma.srh_usuario.findMany();
+  async Login(login: string, senha: string) {
+
+    const usuario = await this.prisma.srh_usuario.findFirst({
+      where: { login: login },
+    });
+
+    if (!usuario) {
+      throw new UnauthorizedException("Usuário ou senha inválidos");
+    }
+
+    if (usuario.senha !== senha) {
+      throw new UnauthorizedException("Usuário ou senha inválidos");
+    }
+
+    const payload = { codigousuario: usuario.codigousuario, login: usuario.login };
+
+    const token = await this.jwt.signAsync(payload);
+
+    return { 
+        access_token: token,
+        usuario: usuario.login
+     };
   }
 
-  BuscarPorId(codigousuario: number) {
-     return this.prisma.srh_usuario.findUnique({
+  async ListarTodos() {
+    return await this.prisma.srh_usuario.findMany();
+  }
+
+  async BuscarPorId(codigousuario: number) {
+     return await this.prisma.srh_usuario.findUnique({
       where: { codigousuario: codigousuario },
     });
   }
 
-  Salvar(data: any) {
+  async Salvar(data: any) {
    const srh_usuario = SrhUsuarioSchema.parse(data);
-   return this.prisma.srh_usuario.create({ data: srh_usuario });
+   return await this.prisma.srh_usuario.create({ data: srh_usuario });
   }
 
-  Alterar(codigousuario: number, data: any) {
+  async Alterar(codigousuario: number, data: any) {
     const srh_usuario = SrhUsuarioSchema.parse(data);
-    return this.prisma.srh_usuario.update({
+    return await this.prisma.srh_usuario.update({
       where: { codigousuario: codigousuario },
-      data,
+      data: srh_usuario,
     });
   }
 
-  Excluir(codigousuario: number) {
-    this.prisma.srh_usuario.delete({ where: { codigousuario } });
+  async Excluir(codigousuario: number) {
+    await this.prisma.srh_usuario.delete({ where: { codigousuario } });
   }
 }

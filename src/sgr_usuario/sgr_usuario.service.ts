@@ -12,30 +12,30 @@ export class SgrUsuarioService {
 
   constructor(private prisma: PrismaService) {}
   
-  ListarTodos() {
-    return this.prisma.sgr_usuario.findMany();
+  async ListarTodos() {
+    return await this.prisma.sgr_usuario.findMany();
   }
 
-  BuscarPorId(codigousuario: number) {
-     return this.prisma.sgr_usuario.findUnique({
+  async BuscarPorId(codigousuario: number) {
+     return await this.prisma.sgr_usuario.findUnique({
       where: { codigousuario: codigousuario },
     });
   }
 
-  Salvar(data: any) {
+  async Salvar(data: any) {
    const sgr_usuario = sgrUsuarioSchema.parse(data);
-   return this.prisma.sgr_usuario.create({ data: sgr_usuario });
+   return await this.prisma.sgr_usuario.create({ data: sgr_usuario });
   }
 
-  Alterar(codigousuario: number, data: any) {
+  async Alterar(codigousuario: number, data: any) {
     const sgr_usuario = sgrUsuarioSchema.parse(data);
-    return this.prisma.sgr_usuario.update({
+    return await this.prisma.sgr_usuario.update({
       where: { codigousuario: codigousuario },
       data: sgr_usuario,
     });
   }
 
-  Excluir(codigousuario: number) {
-    this.prisma.sgr_usuario.delete({ where: { codigousuario } });
+  async Excluir(codigousuario: number) {
+    await this.prisma.sgr_usuario.delete({ where: { codigousuario } });
   }
 }

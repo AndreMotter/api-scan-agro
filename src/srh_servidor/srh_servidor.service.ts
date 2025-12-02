@@ -12,30 +12,30 @@ export class SrhServidorService {
 
   constructor(private prisma: PrismaService) {}
   
-  ListarTodos() {
-    return this.prisma.srh_servidor.findMany();
+  async ListarTodos() {
+    return await this.prisma.srh_servidor.findMany();
   }
 
-  BuscarPorId(codigoservidor: number) {
-     return this.prisma.srh_servidor.findUnique({
+  async BuscarPorId(codigoservidor: number) {
+     return await this.prisma.srh_servidor.findUnique({
       where: { codigoservidor: codigoservidor },
     });
   }
 
-  Salvar(data: any) {
+  async Salvar(data: any) {
    const srh_servidor = SrhServidorSchema.parse(data);
-   return this.prisma.srh_servidor.create({ data: srh_servidor });
+   return await this.prisma.srh_servidor.create({ data: srh_servidor });
   }
 
-  Alterar(codigoservidor: number, data: any) {
+  async Alterar(codigoservidor: number, data: any) {
     const srh_servidor = SrhServidorSchema.parse(data);
-    return this.prisma.srh_servidor.update({
+    return await this.prisma.srh_servidor.update({
       where: { codigoservidor: codigoservidor },
       data: srh_servidor,
     });
   }
 
-  Excluir(codigoservidor: number) {
-    this.prisma.srh_servidor.delete({ where: { codigoservidor } });
+  async Excluir(codigoservidor: number) {
+    await this.prisma.srh_servidor.delete({ where: { codigoservidor } });
   }
 }

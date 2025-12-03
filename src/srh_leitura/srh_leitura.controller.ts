@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SrhLeituraService } from './srh_leitura.service';
 
 @Controller('srh-leitura')
@@ -6,8 +6,8 @@ export class SrhLeituraController {
   constructor(private readonly SrhLeituraService: SrhLeituraService) {}
 
   @Get("ListarTodos")
-  ListarTodos() {
-    return this.SrhLeituraService.ListarTodos();
+  ListarTodos(@Query("codigoservidor") codigoservidor?: string) {
+    return this.SrhLeituraService.ListarTodos(Number(codigoservidor));
   }
 
   @Get('BuscarPorId/:codigoleitura')

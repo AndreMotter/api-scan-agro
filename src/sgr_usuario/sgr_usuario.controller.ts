@@ -5,6 +5,11 @@ import { SgrUsuarioService } from './sgr_usuario.service';
 export class SgrUsuarioController {
   constructor(private readonly sgrUsuarioService: SgrUsuarioService) {}
 
+  @Post("Login")
+  Login(@Body() data: any) {
+    return this.sgrUsuarioService.Login(data.login, data.senha);
+  }
+
   @Get("ListarTodos")
   ListarTodos() {
     return this.sgrUsuarioService.ListarTodos();

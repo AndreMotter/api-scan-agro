@@ -10,6 +10,10 @@ export class JwtAuthMiddleware implements NestMiddleware {
     if (req.originalUrl.includes('/srh-usuario/Login')) {
       return next();
     }
+    
+    if (req.originalUrl.includes('/sgr-usuario/Login')) {
+      return next();
+    }
 
     if (req.originalUrl.includes('/srh-leitura/Salvar')) {
       return next();

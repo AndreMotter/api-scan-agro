@@ -11,6 +11,14 @@ export class JwtAuthMiddleware implements NestMiddleware {
       return next();
     }
 
+    if (req.originalUrl.includes('/srh-leitura/Salvar')) {
+      return next();
+    }
+
+    if (req.originalUrl.includes('/sgr-leituravideo/Salvar')) {
+      return next();
+    }
+
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {

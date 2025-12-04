@@ -21,7 +21,28 @@ model sgr_cultura {
   descricao      String? 
   correferencia  String? 
   imagem         String?
-  situacao          Boolean @default(true)
+  situacao       Boolean @default(true)
+
+  leituravideos     sgr_leituravideo[]
+}
+
+model sgr_areacoleta {
+  codigoareacoleta  Int     @id @default(autoincrement())
+  nome              String 
+
+  leituravideos     sgr_leituravideo[]
+}
+
+model sgr_leituravideo {
+  codigoleituravideo  Int @id @default(autoincrement())
+  codigoareacoleta    Int     
+  codigocultura       Int 
+  quantidade          Decimal  @db.Decimal(20, 4)
+  video               String
+  datahora            DateTime
+
+  areacoleta     sgr_areacoleta  @relation(fields: [codigoareacoleta], references: [codigoareacoleta])
+  cultura        sgr_cultura     @relation(fields: [codigocultura], references: [codigocultura])
 }
 
 model srh_usuario {

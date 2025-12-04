@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SgrLeituraVideoService } from './sgr_leituravideo.service';
 
 @Controller('sgr-leituravideo')
@@ -6,8 +6,10 @@ export class SgrLeituraVideoController {
   constructor(private readonly SgrLeituraVideoService: SgrLeituraVideoService) {}
 
   @Get("ListarTodos")
-  ListarTodos() {
-    return this.SgrLeituraVideoService.ListarTodos();
+  ListarTodos(@Query("area") area: string, @Query("cultura") cultura: string) {
+    const area_filtrar = area ? Number(area) : undefined;
+    const cultura_filtrar = cultura ? Number(cultura) : undefined;
+    return this.SgrLeituraVideoService.ListarTodos(area_filtrar, cultura_filtrar);
   }
 
   @Get('BuscarPorId/:codigoleituravideo')

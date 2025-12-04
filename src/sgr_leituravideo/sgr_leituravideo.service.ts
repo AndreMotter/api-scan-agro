@@ -15,8 +15,18 @@ export class SgrLeituraVideoService {
 
   constructor(private prisma: PrismaService) {}
 
-  async ListarTodos() {
-    return await this.prisma.sgr_leituravideo.findMany();
+  async ListarTodos(area_filtrar?: number, cultura_filtrar?: number) {
+    return await this.prisma.sgr_leituravideo.findMany({
+       where: {
+        ...(area_filtrar ? { codigoareacoleta: area_filtrar } : {}),
+        ...(cultura_filtrar ? { codigocultura: cultura_filtrar } : {}),
+      },
+      orderBy: { codigoleituravideo: "desc" },
+      include: {
+         areacoleta: true,
+         cultura: true,
+      },
+    });
   }
 
   async BuscarPorId(codigoleituravideo: number) {

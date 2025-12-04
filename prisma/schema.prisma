@@ -21,7 +21,6 @@ model sgr_cultura {
   descricao      String? 
   correferencia  String? 
   imagem         String?
-  situacao       Boolean @default(true)
 
   leituravideos     sgr_leituravideo[]
 }

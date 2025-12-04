@@ -8,7 +8,6 @@ export const sgrCulturaSchema = z.object({
   descricao: z.string().optional().nullable(),
   correferencia: z.string().optional().nullable(),
   imagem: z.string().optional().nullable(),
-  situacao: z.boolean().optional().default(true),
 });
 
 @Injectable()

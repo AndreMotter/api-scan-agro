@@ -23,6 +23,7 @@ export class SrhLeituraService {
 
     return await this.prisma.srh_leitura.findMany({
       where,
+      orderBy: { codigoleitura: "desc" },
       include: {
         servidor: true,
       },
